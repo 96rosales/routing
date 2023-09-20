@@ -1,0 +1,339 @@
+R1
+ Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco IOS Software, Linux Software (I86BI_LINUX-ADVENTERPRISEK9-M), Version 15.3(1.3)T, ENGINEERING WEEKLY BUILD, synced to V152_4_M1_10
+Copyright (c) 1986-2012 by Cisco Systems, Inc.
+Compiled Thu 25-Oct-12 04:35 by hlo
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Linux Unix (Intel-x86) processor with 113130K bytes of memory.
+Processor board ID 12
+16 Ethernet interfaces
+128K bytes of NVRAM.
+
+
+
+Press RETURN to get started!
+
+
+R1>
+R1>
+R1>
+R1>en
+Password: 
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#Int loopback 0
+R1(config-if)# ip add 1.1.1.1 255.255.255.255
+R1(config-if)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#network 1.1.1.1 0.0.0.0 area 12
+R1(config-router)#router ospf 1
+R1(config-router)#network 10.1.1.0 0.0.0.3 area 12
+R1(config-router)#exit
+R1(config)#exit
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#Int loopback 0
+R1(config-if)# ip add 1.1.1.1 255.255.255.255
+R1(config-if)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#network 1.1.1.1 0.0.0.0 area 12
+R1(config-router)#router ospf 1
+R1(config-router)#network 10.1.1.0 0.0.0.3 area 12
+R1(config-router)#exit
+R1(config)#do ping 4.4.4.4
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 4.4.4.4, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+R1(config)#ping 2.2.2.2
+            ^
+% Invalid input detected at '^' marker.
+
+R1(config)#do ping 2.2.2.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2.2.2.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+R1(config)#do ping 10.1.4.5
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.1.4.5, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+R1(config)#do ping 4.4.4.4
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 4.4.4.4, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+R1(config)#hostname R1-Juniper
+R1-Juniper(config)#int lo 0
+R1-Juniper(config-if)#shutdown
+R1-Juniper(config-if)#no shut
+R1-Juniper(config-if)#
+R1-Juniper#sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+      1.0.0.0/32 is subnetted, 1 subnets
+C        1.1.1.1 is directly connected, Loopback0
+      2.0.0.0/32 is subnetted, 1 subnets
+O IA     2.2.2.2 [110/11] via 10.1.1.2, 01:52:18, Ethernet1/0
+      3.0.0.0/32 is subnetted, 1 subnets
+O IA     3.3.3.3 [110/21] via 10.1.1.2, 01:51:43, Ethernet1/0
+      4.0.0.0/32 is subnetted, 1 subnets
+O IA     4.4.4.4 [110/31] via 10.1.1.2, 01:51:43, Ethernet1/0
+      10.0.0.0/8 is variably subnetted, 8 subnets, 3 masks
+C        10.1.1.0/30 is directly connected, Ethernet1/0
+L        10.1.1.1/32 is directly connected, Ethernet1/0
+O IA     10.1.1.4/30 [110/20] via 10.1.1.2, 01:52:18, Ethernet1/0
+O IA     10.1.1.8/30 [110/30] via 10.1.1.2, 01:51:43, Ethernet1/0
+O E2     10.1.4.4/30 [110/20] via 10.1.1.2, 00:27:35, Ethernet1/0
+O E2     10.1.4.8/30 [110/20] via 10.1.1.2, 00:27:35, Ethernet1/0
+O E2     10.2.1.0/24 [110/20] via 10.1.1.2, 00:27:35, Ethernet1/0
+O E2     10.2.2.0/24 [110/20] via 10.1.1.2, 00:27:35, Ethernet1/0
+      192.168.1.0/27 is subnetted, 1 subnets
+O E2     192.168.1.128 [110/20] via 10.1.1.2, 00:27:35, Ethernet1/0
+      207.7.7.0/24 is variably subnetted, 2 subnets, 2 masks
+C        207.7.7.0/24 is directly connected, Ethernet1/2
+L        207.7.7.1/32 is directly connected, Ethernet1/2
+      208.8.8.0/24 is variably subnetted, 2 subnets, 2 masks
+C        208.8.8.0/24 is directly connected, Ethernet1/1
+L        208.8.8.1/32 is directly connected, Ethernet1/1
+      209.9.9.0/24 is variably subnetted, 2 subnets, 2 masks
+C        209.9.9.0/24 is directly connected, Ethernet1/3
+L        209.9.9.1/32 is directly connected, Ethernet1/3
+R1-Juniper#sh ip bgp summary
+% BGP not active
+
+R1-Juniper#sh ip bg
+R1-Juniper#sh ip bgp s
+R1-Juniper#sh ip bgp summary 
+% BGP not active
+
+R1-Juniper#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1-Juniper(config)#router bgp 1
+R1-Juniper(config-router)# bgp log-neighbor-changes
+R1-Juniper(config-router)# neighbor 208.8.8.4 remote-as 45
+R1-Juniper(config-router)# neighbor 207.7.7.2 remote-as 2
+R1-Juniper(config-router)# neighbor 209.9.9.3 remote-as 3
+R1-Juniper(config-router)# network 10.1.1.0 Mask 255.255.255.252
+R1-Juniper(config-router)# network 207.7.7.0 mask 255.255.255.0
+R1-Juniper(config-router)# network 208.8.8.0 mask 255.255.255.0
+R1-Juniper(config-router)# network 209.9.9.0 mask 255.255.255.0
+R1-Juniper(config-router)#end
+R1-Juniper#sh ip bgp summary 
+BGP router identifier 1.1.1.1, local AS number 1
+BGP table version is 1, main routing table version 1
+15 network entries using 2100 bytes of memory
+43 path entries using 3268 bytes of memory
+11/0 BGP path/bestpath attribute entries using 1540 bytes of memory
+9 BGP AS-PATH entries using 216 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 7124 total bytes of memory
+BGP activity 15/0 prefixes, 43/0 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+207.7.7.2       4            2       8       2        1    0    0 00:00:02       13
+208.8.8.4       4           45       9       2        1    0    0 00:00:00       13
+209.9.9.3       4            3       9       2        1    0    0 00:00:01       13
+R1-Juniper#ping 8.8.8.8
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 8.8.8.8, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+R1-Juniper#CONFIG t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1-Juniper(config)#router ospf 1
+R1-Juniper(config-router)#Default-Information Originate
+R1-Juniper(config-router)#
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco IOS Software, Linux Software (I86BI_LINUX-ADVENTERPRISEK9-M), Version 15.3(1.3)T, ENGINEERING WEEKLY BUILD, synced to V152_4_M1_10
+Copyright (c) 1986-2012 by Cisco Systems, Inc.
+Compiled Thu 25-Oct-12 04:35 by hlo
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Linux Unix (Intel-x86) processor with 113130K bytes of memory.
+Processor board ID 12
+16 Ethernet interfaces
+128K bytes of NVRAM.
+
+
+
+Press RETURN to get started!
+
+
+R1>en
+Password: 
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#Int loopback 0
+R1(config-if)# ip add 1.1.1.1 255.255.255.255
+R1(config-if)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#network 1.1.1.1 0.0.0.0 area 12
+R1(config-router)#router ospf 1
+R1(config-router)#network 10.1.1.0 0.0.0.3 area 12
+R1(config-router)#
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router bgp 1
+R1(config-router)# bgp log-neighbor-changes
+R1(config-router)# neighbor 208.8.8.4 remote-as 45
+R1(config-router)# neighbor 207.7.7.2 remote-as 2
+R1(config-router)# neighbor 209.9.9.3 remote-as 3
+R1(config-router)# network 10.1.1.0 Mask 255.255.255.252
+R1(config-router)# network 207.7.7.0 mask 255.255.255.0
+R1(config-router)# network 208.8.8.0 mask 255.255.255.0
+R1(config-router)# network 209.9.9.0 mask 255.255.255.0
+R1(config-router)# 
+R1#CONFIG t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router ospf 1
+R1(config-router)#Default-Information Originate
+R1(config-router)#
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco IOS Software, Linux Software (I86BI_LINUX-ADVENTERPRISEK9-M), Version 15.3(1.3)T, ENGINEERING WEEKLY BUILD, synced to V152_4_M1_10
+Copyright (c) 1986-2012 by Cisco Systems, Inc.
+Compiled Thu 25-Oct-12 04:35 by hlo
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Linux Unix (Intel-x86) processor with 113130K bytes of memory.
+Processor board ID 12
+16 Ethernet interfaces
+128K bytes of NVRAM.
+
+
+
+Press RETURN to get started!
+
+
+R1>
+R1>en
+Password: 
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#Int loopback 0
+R1(config-if)# ip add 1.1.1.1 255.255.255.255
+R1(config-if)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#network 1.1.1.1 0.0.0.0 area 12
+R1(config-router)#router ospf 1
+R1(config-router)#network 10.1.1.0 0.0.0.3 area 12
+R1(config-router)#
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router bgp 1
+R1(config-router)# bgp log-neighbor-changes
+R1(config-router)# neighbor 208.8.8.4 remote-as 45
+R1(config-router)# neighbor 207.7.7.2 remote-as 2
+R1(config-router)# neighbor 209.9.9.3 remote-as 3
+R1(config-router)# network 10.1.1.0 Mask 255.255.255.252
+R1(config-router)# network 207.7.7.0 mask 255.255.255.0
+R1(config-router)# network 208.8.8.0 mask 255.255.255.0
+R1(config-router)# network 209.9.9.0 mask 255.255.255.0
+R1(config-router)#end
+R1#CONFIG t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router ospf 1
+R1(config-router)#Default-Information Originate
+R1(config-router)#
